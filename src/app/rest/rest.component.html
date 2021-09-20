@@ -1,16 +1,42 @@
-<h4>Czasowniki nieregularne in English</h4>
-<h4>----------------------------------</h4>
-<table class="table table-bordered">
-  <thead>
+<h1>Coronavirus Tracker Application</h1>
+<p>This application lists the current number of cases reported across the globe</p>
+
+<div class="jumbotron">
+  <!-- <h1 class="display-4" th:text="${totalReportedCases}"></h1> -->
+  <p class="lead">Total cases reported as of today</p>
+  <!-- <h1 class="display-4" th:text="${totalReportedDeaths}"></h1> -->
+  <p class="lead">Total deaths reported as of today</p>
+  <hr class="my-4">
+  <p>
+      <span>New cases reported since previous day:</span>
+      <!-- <span th:text="${totalNewCases}"></span> -->
+  </p>
+  <hr class="my-4">
+</div>
+
+<nav class="navbar">
+    <input class="form-control" type="text" name="country" [(ngModel)]="country" (ngModelChange)="search()"
+    placeholder="Enter country to search">
+</nav>
+
+<table class="table">
     <tr>
-      <th>Location</th>
-      <th>newCases</th>
+      <th (click)="sort('location')">Location&nbsp;<i class="fa fa-sort"></i></th>
+      <th (click)="sort('newCases')">New Cases&nbsp;<i class="fa fa-sort"></i></th>
+      <th (click)="sort('totalCases')">Total Cases&nbsp;<i class="fa fa-sort"></i></th>
+      <th (click)="sort('newCases')">New Deaths&nbsp;<i class="fa fa-sort"></i></th>
+      <th (click)="sort('deaths')">Total Deaths&nbsp;<i class="fa fa-sort"></i></th>
+      <th (click)="sort('polulation')">Polulation&nbsp;<i class="fa fa-sort"></i></th>
     </tr>
-  </thead>
 
   <tbody>
-    <tr *ngFor="let location of locations">
+    <tr *ngFor="let location of locations | orderBy: key: reverse">
+      <td>{{ location.country }}</td>
       <td>{{ location.newCases }}</td>
+      <td>{{ location.totalCases }}</td>
+      <td>{{ location.deaths }}</td>
+      <td>{{ location.totalDeaths }}</td>
+      <td>{{ location.population }}</td>
     </tr>
   </tbody>
 
